@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">AtmHunter</string>
-    <string name="title_activity_atm_map">Atm Hunter</string>
+    <string name="app_name">MedCare</string>
+    <string name="title_activity_atm_map">MedCare</string>
     <string name="title_activity_bank_view">BankViewActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_test">TestActivity</string>
-    <string name="list">LIST</string>
-    <string name="title_activity_list_banks">List of Banks</string>
-    <string name="address">Address</string>
-    <string name="viewonmap">VIEW ON MAP</string>
+    <string name="list">LISTA</string>
+    <string name="title_activity_list_banks">Lista</string>
+    <string name="address">Adresa</string>
+    <string name="viewonmap">Shiko ne Harte</string>
     <string name="atms">ATM</string>
-    <string name="atm_view">Atm on Map</string>
+    <string name="atm_view">Farmaci ne Harte</string>
     <string name="player">Player Api</string>
     <string name="error_player">Error %s</string>
     <string name="playerview_text">Preview</string>
