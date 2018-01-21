@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AtmHunter</string>
+    <string name="title_activity_atm_map">Atm Hunter</string>
+    <string name="title_activity_bank_view">BankViewActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="list">LIST</string>
+    <string name="title_activity_list_banks">List of Banks</string>
+    <string name="address">Address</string>
+    <string name="viewonmap">VIEW ON MAP</string>
+    <string name="atms">ATM</string>
+    <string name="atm_view">Atm on Map</string>
+    <string name="player">Player Api</string>
+    <string name="error_player">Error %s</string>
+    <string name="playerview_text">Preview</string>
+    <string name="google_maps_k">AIzaSyB5QWfSgoG-SijxAbBnxu51t-iaOLoipz4</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>

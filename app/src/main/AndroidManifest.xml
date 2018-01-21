@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.user.medcare">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_k" />
+
+        <activity
+            android:name=".MedMapActivity"
+            android:label="@string/title_activity_atm_map">
+        </activity>
+        <activity
+            android:name=".MedViewActivity"
+            android:label="@string/title_activity_bank_view"
+            android:parentActivityName=".MedMapActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MedMapActivity" />
+        </activity>
+        <activity
+            android:name=".AtmMapActivity"
+            android:label="@string/atm_view"
+            android:parentActivityName=".MedViewActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MedViewActivity" />
+        </activity>
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListBanksActivity"
+            android:label="@string/title_activity_list_banks"
+            android:parentActivityName=".MedMapActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MedMapActivity" />
+        </activity>
+        <activity
+            android:name=".PlayerViewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/player"
+            android:parentActivityName=".MedViewActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MedViewActivity" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

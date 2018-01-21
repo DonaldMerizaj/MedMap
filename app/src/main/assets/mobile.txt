@@ -1,0 +1,251 @@
+{
+  "banks": [
+    {
+      "id": 1,
+      "name": "Banka Kombetare Tregtare",
+      "address": "Bulevardi \"Zhan d\'Ark\", Tiranë, Shqipëri",
+      "logo": "http://www.publicity.al/wp-content/uploads/2012/10/bkt-logo-282x188.jpg",
+      "lat": 41.3249335,
+      "lng": 19.8203699,
+      "atm": [
+        {
+          "id": 1,
+          "address": "Bulevardi Zogu I",
+          "lat": 41.3341461,
+          "lng": 19.8142397
+        },
+        {
+          "id": 2,
+          "address": "Qendra Kristal",
+          "lat": "41.314840",
+          "lng": "19.802365"
+        },
+		{
+          "id": 3,
+          "address": "Ruga Elbasanit",
+          "lat": "41.322977",
+          "lng": "19.8231793"
+        },
+		{
+          "id": 4,
+          "address": "Laprake",
+          "lat": "41.338532",
+          "lng": "19.790015"
+        },
+		{
+          "id": 5,
+          "address": "Stacioni Trenit",
+          "lat": "41.3338656",
+          "lng": "19.7785041"
+        },
+		{
+          "id": 6,
+          "address": "Medrese",
+          "lat": "41.342527",
+          "lng": "19.833960"
+        },
+		{
+          "id": 7,
+          "address": "Komuna Parisit",
+          "lat": "41.316617",
+          "lng": "19.806838"
+        },
+		{
+          "id": 8,
+          "address": "Spitali Amerikan",
+          "lat": "41.3481696",
+          "lng": "19.7756017"
+        },
+		{
+          "id": 9,
+          "address": "Rruga Durresit",
+          "lat": "41.331898",
+          "lng": "19.806587"
+        },
+		{
+          "id": 10,
+          "address": "Myslym Shyri",
+          "lat": "41.323837",
+          "lng": "19.805636"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Raiffeisen Bank",
+      "address": "Rr. Kavajes,Tirana-Albania",
+      "logo": "http://www.raiffeisen.al/themes/site_themes/default_site/images/logos/header_logo.png",
+      "lat": 41.327896,
+      "lng": 19.7661116,
+      "atm": [
+        {
+          "id": 1,
+          "address": "Rruga Durresit",
+          "lat": "41.329471",
+          "lng": "19.814261"
+        },
+        {
+          "id": 2,
+          "address": "Rruga Elbasanit",
+          "lat": "41.304134",
+          "lng": "19.844645"
+        },
+		{
+          "id": 3,
+          "address": "Komuna Parisit",
+          "lat": "41.319349",
+          "lng": "19.807566"
+        },
+		{
+          "id": 4,
+          "address": "ETC",
+          "lat": "41.323926",
+          "lng": "19.822329"
+        },
+		{
+          "id": 5,
+          "address": "Selite",
+          "lat": "41.320445",
+          "lng": "19.794519"
+        }
+
+      ]
+    },
+	 {
+      "id": 3,
+      "name": "Alpha Bank",
+      "address": "Bulevardi Zogu I, Tiranë 1001, Albania",
+      "logo": "http://www.alpha.al/Themes/1/Default/Media/logo.gif",
+      "lat": 41.330817,
+      "lng": 19.817522,
+      "atm": [
+        {
+          "id": 1,
+          "address": "Sheshi Italia",
+          "lat": "41.318248",
+          "lng": "19.822243"
+        },
+        {
+          "id": 2,
+          "address": "ETC",
+          "lat": "41.323791",
+          "lng": "19.822586"
+        },
+		{
+          "id": 3,
+          "address": "Rruga Vaso Pasha",
+          "lat": "41.321213",
+          "lng": "19.816063"
+        },
+		{
+          "id": 4,
+          "address": "Zogu ZI",
+          "lat": "41.333575",
+          "lng": "19.804875"
+        },
+		{
+          "id": 5,
+          "address": "Stadiumi Dinamo",
+          "lat": "41.318635",
+          "lng": "19.808510"
+        }
+
+      ]
+    },
+	 {
+      "id": 4,
+      "name": "NBG Bank",
+      "address": "Rr. Dritan Hoxha, Tiranë, Albania",
+      "logo": "http://www.nbgbank.al/img/logo.jpg",
+      "lat": 41.334104,
+      "lng": 19.802430,
+      "atm": [
+        {
+          "id": 1,
+          "address": "Bulevardi Zogu 1",
+          "lat": "41.332727",
+          "lng": "19.817017"
+        },
+        {
+          "id": 2,
+          "address": "Rruga Elbasanit",
+          "lat": "41.325315",
+          "lng": "19.825772"
+        },
+		{
+          "id": 3,
+          "address": "Pazari Ri",
+          "lat": "41.329051",
+          "lng": "19.822510"
+        },
+		{
+          "id": 4,
+          "address": "Rruga Dibres",
+          "lat": "41.335044",
+          "lng": "19.823626"
+        },
+		{
+          "id": 5,
+          "address": "Komuna Parisit",
+          "lat": "41.313516",
+          "lng": "19.804057"
+        },
+		{
+          "id": 6,
+          "address": "Sheshi Shtraus",
+          "lat": "41.334980",
+          "lng": "19.835900"
+        }
+
+      ]
+    },
+	 {
+      "id": 5,
+      "name": "Credins Bank",
+      "address": " Rr. Arkitekt Kasemi, Tiranë 1001, Albania",
+      "logo": "http://www.bankacredins.com/wp-content/uploads/2016/06/2016-06-15.png",
+      "lat": 41.333624,
+      "lng": 19.833582,
+      "atm": [
+        {
+          "id": 1,
+          "address": "Bulevardi Zogu 1",
+          "lat": "41.330530",
+          "lng": "19.817875"
+        },
+        {
+          "id": 2,
+          "address": "Rruga Gjin Bue Shpata",
+          "lat": "41.320282",
+          "lng": "19.811867"
+        },
+		{
+          "id": 3,
+          "address": "Rruga Vaso Pasha",
+          "lat": "41.321762",
+          "lng": "19.815300"
+        },
+		{
+          "id": 4,
+          "address": "Rruga Pjeter Bogdani",
+          "lat": "41.321305",
+          "lng": "19.815590"
+        },
+		{
+          "id": 5,
+          "address": "Rruga Barrikadave",
+          "lat": "41.328723",
+          "lng": "19.821909"
+        },
+		{
+          "id": 6,
+          "address": "Rruga Ilia Xhokaxhi",
+          "lat": "41.345801",
+          "lng": "19.837531"
+        }
+
+      ]
+    }
+	
+  ]
+}
