@@ -13,7 +13,10 @@
     <string name="player">Player Api</string>
     <string name="error_player">Error %s</string>
     <string name="playerview_text">Preview</string>
-    <string name="google_maps_k">AIzaSyB5QWfSgoG-SijxAbBnxu51t-iaOLoipz4</string>
+    <string name="google_maps_k">AIzaSyD0Zq8GWjRd6rsKetXE8d4Jx-QxMfAFb0o</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

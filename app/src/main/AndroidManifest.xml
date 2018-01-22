@@ -2,13 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.medcare">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme_custom"
+        android:fullBackupContent="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_k" />
@@ -21,7 +25,7 @@
             android:name=".MedViewActivity"
             android:label="@string/title_activity_bank_view"
             android:parentActivityName=".MedMapActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_custom">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MedMapActivity" />
@@ -30,7 +34,7 @@
             android:name=".AtmMapActivity"
             android:label="@string/atm_view"
             android:parentActivityName=".MedViewActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_custom">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MedViewActivity" />
@@ -38,12 +42,12 @@
         <activity
             android:name=".TestActivity"
             android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme_custom" />
         <activity
             android:name=".ListBanksActivity"
             android:label="@string/title_activity_list_banks"
             android:parentActivityName=".MedMapActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_custom">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MedMapActivity" />
@@ -53,7 +57,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/player"
             android:parentActivityName=".MedViewActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_custom">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MedViewActivity" />
@@ -61,7 +65,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_custom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

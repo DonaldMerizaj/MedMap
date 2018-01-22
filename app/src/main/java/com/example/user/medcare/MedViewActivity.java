@@ -160,7 +160,7 @@ public class MedViewActivity extends AppCompatActivity {
     public String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getApplicationContext().getAssets().open("banks.json");
+            InputStream is = getApplicationContext().getAssets().open("medcare.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
