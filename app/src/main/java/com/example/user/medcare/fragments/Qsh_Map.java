@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.user.medcare.MainActivity;
 import com.example.user.medcare.R;
@@ -41,21 +40,29 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Locale;
 
-// Fragmenti i hartes se farmacive
-public class Farmaci_Map extends Fragment {
-
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link Qsh_Map.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * create an instance of this fragment.
+ */
+public class Qsh_Map extends Fragment {
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 100 ;
+    private static boolean isEnabledLocation = false;
     Context mContext;
 
-    private OnFragmentInteractionListener mListener;
+    private Farmaci_Map.OnFragmentInteractionListener mListener;
     private Location mLastKnownLocation;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private LatLng defaultLocation;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     private Parcelable mCurrentLocation, mCameraPosition;
+    private boolean mLocationPermissionGranted;
 
-    public Farmaci_Map() {
+    public Qsh_Map() {
         // Required empty public constructor
     }
 
@@ -66,7 +73,7 @@ public class Farmaci_Map extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_farmaci_map, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_qsh_map, container, false);
 
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
@@ -104,7 +111,6 @@ public class Farmaci_Map extends Fragment {
         return rootView;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -129,12 +135,6 @@ public class Farmaci_Map extends Fragment {
         mMapView.onLowMemory();
     }
 
-    public static Farmaci_Map newInstance(String param1, String param2) {
-        Farmaci_Map fragment = new Farmaci_Map();
-        Bundle args = new Bundle();
-
-        return fragment;
-    }
 
     private void updateLocationUI() {
         if (googleMap == null) {
@@ -171,10 +171,10 @@ public class Farmaci_Map extends Fragment {
                         if (task.isSuccessful() ) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            if (!((MainActivity)getActivity()).isLocationEnabled()){
-                                Toast.makeText(mContext, "Aktivizoni Location per rezultate me te sakta",
-                                        Toast.LENGTH_LONG).show();
-                            }
+//                            if (!((MainActivity)getActivity()).isLocationEnabled()){
+//                                Toast.makeText(mContext, "Aktivizoni Location per rezultate me te sakta",
+//                                        Toast.LENGTH_LONG).show();
+//                            }
                             if (mLastKnownLocation != null) {
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(mLastKnownLocation.getLatitude(),
@@ -188,10 +188,10 @@ public class Farmaci_Map extends Fragment {
 //                                        .icon(bmp)
 //                                        .title("Ti je ketu").draggable(false));
                             }else {
-                                if (!((MainActivity)getActivity()).isNetworkAvailable()){
-                                    Toast.makeText(mContext, "Aktivizoni Internetin per rezultate te perditesuara",
-                                            Toast.LENGTH_LONG).show();
-                                }
+//                                if (!((MainActivity)getActivity()).isNetworkAvailable()){
+//                                    Toast.makeText(mContext, "Aktivizoni Internetin per te vazhduar",
+//                                            Toast.LENGTH_LONG).show();
+//                                }
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         ((MainActivity)getActivity()).getDefaultLocation(), 15));
                                 googleMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -228,7 +228,7 @@ public class Farmaci_Map extends Fragment {
             JSONObject obj = new JSONObject(loadJSONFromAsset());
 
 
-            JSONArray array = obj.getJSONArray("farmaci");
+            JSONArray array = obj.getJSONArray("qsh");
 
             for (int i = 0; i <array.length() ; i++)
             {
@@ -296,8 +296,8 @@ public class Farmaci_Map extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof Farmaci_Map.OnFragmentInteractionListener) {
+            mListener = (Farmaci_Map.OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -330,10 +330,7 @@ public class Farmaci_Map extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-
-
-                mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
-
+            mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
     }

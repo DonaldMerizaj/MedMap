@@ -2,25 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.medcare">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme_custom"
-        android:fullBackupContent="true">
+        android:theme="@style/AppTheme_custom">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_k" />
 
-        <activity
-            android:name=".MedMapActivity"
-            android:label="@string/title_activity_atm_map">
-        </activity>
         <activity
             android:name=".MedViewActivity"
             android:label="@string/title_activity_bank_view"
@@ -31,27 +28,9 @@
                 android:value=".MedMapActivity" />
         </activity>
         <activity
-            android:name=".AtmMapActivity"
-            android:label="@string/atm_view"
-            android:parentActivityName=".MedViewActivity"
-            android:theme="@style/AppTheme_custom">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MedViewActivity" />
-        </activity>
-        <activity
             android:name=".TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme_custom" />
-        <activity
-            android:name=".ListBanksActivity"
-            android:label="@string/title_activity_list_banks"
-            android:parentActivityName=".MedMapActivity"
-            android:theme="@style/AppTheme_custom">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MedMapActivity" />
-        </activity>
         <activity
             android:name=".PlayerViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -72,6 +51,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ListItemActivity"
+            android:label="@string/title_activity_bank_view"
+            android:parentActivityName=".MedMapActivity"
+            android:theme="@style/AppTheme_custom"/>
     </application>
 
 </manifest>

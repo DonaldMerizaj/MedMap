@@ -66,14 +66,14 @@ public class MedViewActivity extends AppCompatActivity {
 
 
     private void setActions() {
-        mViewAllAtms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), AtmMapActivity.class);
-                i.putExtra(Bank.EXTRA_ID, mSelectedBankId);
-                startActivity(i);
-            }
-        });
+//        mViewAllAtms.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getApplicationContext(), AtmMapActivity.class);
+//                i.putExtra(Bank.EXTRA_ID, mSelectedBankId);
+//                startActivity(i);
+//            }
+//        });
     }
 
     private void initView() {
@@ -88,15 +88,15 @@ public class MedViewActivity extends AppCompatActivity {
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerAtms.setLayoutManager(mLayoutManager);
 
-        mRecyclerAtms.addOnItemTouchListener(new OnClickListenerRecyclerView(getApplicationContext(), new OnClickListenerRecyclerView.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent i = new Intent(getApplicationContext(), AtmMapActivity.class);
-                i.putExtra(Bank.EXTRA_ID, mSelectedBankId);
-                i.putExtra(Bank.EXTRA_ATM_ID, mAdapter.getAll().get(position).getId());
-                startActivity(i);
-            }
-        }));
+//        mRecyclerAtms.addOnItemTouchListener(new OnClickListenerRecyclerView(getApplicationContext(), new OnClickListenerRecyclerView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                Intent i = new Intent(getApplicationContext(), AtmMapActivity.class);
+//                i.putExtra(Bank.EXTRA_ID, mSelectedBankId);
+//                i.putExtra(Bank.EXTRA_ATM_ID, mAdapter.getAll().get(position).getId());
+//                startActivity(i);
+//            }
+//        }));
 
 
 

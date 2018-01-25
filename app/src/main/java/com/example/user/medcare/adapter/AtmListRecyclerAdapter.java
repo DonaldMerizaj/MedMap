@@ -28,7 +28,7 @@ public class AtmListRecyclerAdapter extends RecyclerView.Adapter<AtmListRecycler
     @Override
     public AtmListRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v = mInlater.inflate(R.layout.row_atm_list, parent, false);
+        View v = mInlater.inflate(R.layout.row_item_list, parent, false);
         return new AtmListRecyclerViewHolder(v);
     }
 

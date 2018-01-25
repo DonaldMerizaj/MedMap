@@ -16,7 +16,7 @@ public class AtmListRecyclerViewHolder extends RecyclerView.ViewHolder {
     public AtmListRecyclerViewHolder(View itemView) {
         super(itemView);
 
-        address = (TextView) itemView.findViewById(R.id.atm_address);
+        address = (TextView) itemView.findViewById(R.id.item_address);
     }
 
     public void bind(Atm atm, Context mContext)

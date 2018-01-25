@@ -1,7 +1,16 @@
 package com.example.user.medcare;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -15,16 +24,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.user.medcare.fragments.Farmaci_Map;
-import com.example.user.medcare.fragments.QshFragment;
-import com.example.user.medcare.model.Qsh;
-import com.google.android.gms.maps.MapFragment;
+import com.example.user.medcare.fragments.Qsh_Map;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements QshFragment.OnFragmentInteractionListener,
+public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmentInteractionListener,
         Farmaci_Map.OnFragmentInteractionListener {
 
     /**
@@ -33,6 +42,14 @@ public class MainActivity extends AppCompatActivity implements QshFragment.OnFra
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private ViewPagerAdapter mPageAdapter;
+    private boolean locationEnabled;
+    public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION= 100;
+    public static LatLng defaultLocation;
+
+    public LatLng getDefaultLocation() {
+        defaultLocation = new LatLng(41.3269816, 19.8161949);
+        return defaultLocation;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +85,10 @@ public class MainActivity extends AppCompatActivity implements QshFragment.OnFra
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_list) {
+            Intent i = new Intent(getApplicationContext(),ListItemActivity.class);
+            startActivity(i);
+            finish();
             return true;
         }
 
@@ -84,11 +104,72 @@ public class MainActivity extends AppCompatActivity implements QshFragment.OnFra
 
         mPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mPageAdapter.addFragment(new Farmaci_Map(), "");
-        mPageAdapter.addFragment(new QshFragment(), "");
+        mPageAdapter.addFragment(new Qsh_Map(), "");
 
         viewPager.setAdapter(mPageAdapter);
     }
 
+    public boolean checkPermissions(){
+
+        requestLocationPremission();
+        return locationEnabled;
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    public boolean isLocationEnabled() {
+        int locationMode = 0;
+
+            try {
+                locationMode = Settings.Secure.getInt(getApplicationContext().getContentResolver(), Settings.Secure.LOCATION_MODE);
+
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+
+
+    }
+
+    private void requestLocationPremission() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED){
+            locationEnabled = true;
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationEnabled = true;
+                }else{
+                    locationEnabled = false;
+                    Toast.makeText(getApplicationContext(), "Ju lutem lejoni aksesimin e vendodhjes tuaj, per te pare rezultatet prane jush!",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
     @Override
     public void onFragmentInteraction(Uri uri) {
 
