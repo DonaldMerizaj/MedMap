@@ -19,15 +19,6 @@
             android:value="@string/google_maps_k" />
 
         <activity
-            android:name=".MedViewActivity"
-            android:label="@string/title_activity_bank_view"
-            android:parentActivityName=".MedMapActivity"
-            android:theme="@style/AppTheme_custom">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MedMapActivity" />
-        </activity>
-        <activity
             android:name=".TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme_custom" />
@@ -52,8 +43,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListItemActivity"
-            android:label="@string/title_activity_bank_view"
-            android:parentActivityName=".MedMapActivity"
+            android:label="@string/title_activity_list_farmaci"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme_custom"/>
     </application>
 

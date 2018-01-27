@@ -1,6 +1,7 @@
 package com.example.user.medcare;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.user.medcare.model.DeveloperKey;
@@ -17,8 +18,8 @@ public class PlayerViewActivity extends YouTubeFailureRecoveryActivity {
         setContentView(R.layout.playerview_youtube);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarPlayer);
+        toolbar.setTitle("YouTube");
 
         YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
@@ -37,5 +38,9 @@ public class PlayerViewActivity extends YouTubeFailureRecoveryActivity {
         return (YouTubePlayerView) findViewById(R.id.youtube_view);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
 

@@ -2,83 +2,66 @@
   "farmaci": [
     {
       "id": 1,
-      "name": "Banka Kombetare Tregtare",
-      "address": "Bulevardi \"Zhan d\'Ark\", Tiranë, Shqipëri",
-      "logo": "http://www.publicity.al/wp-content/uploads/2012/10/bkt-logo-282x188.jpg",
-      "lat": 41.3249335,
-      "lng": 19.8203699
+      "name": "Farmaci DITE e NATE",
+      "address": "Rr. Luigj Gurakuqi",
+      "lat": 41.3278034,
+      "lng": 19.8190184
     },
     {
       "id": 2,
-      "name": "Raiffeisen Bank",
-      "address": "Rr. Kavajes,Tirana-Albania",
-      "logo": "http://www.raiffeisen.al/themes/site_themes/default_site/images/logos/header_logo.png",
-      "lat": 41.327896,
-      "lng": 19.7661116
+      "name": "Farmaci B&B",
+      "address": "Rr. Kavajes",
+      "lat": 41.3282757,
+      "lng": 19.8108836
     },
     {
       "id": 3,
-      "name": "Alpha Bank",
-      "address": "Bulevardi Zogu I, Tiranë 1001, Albania",
-      "logo": "http://www.alpha.al/Themes/1/Default/Media/logo.gif",
-      "lat": 41.330817,
-      "lng": 19.817522
+      "name": "Farmaci Daja",
+      "address": "Rr. A. Z. Cajupi",
+      "lat": 41.3213721,
+      "lng": 19.8124038
     },
     {
       "id": 4,
-      "name": "NBG Bank",
-      "address": "Rr. Dritan Hoxha, Tiranë, Albania",
-      "logo": "http://www.nbgbank.al/img/logo.jpg",
-      "lat": 41.334104,
-      "lng": 19.802430
-    },
-    {
-      "id": 5,
-      "name": "Credins Bank",
-      "address": " Rr. Arkitekt Kasemi, Tiranë 1001, Albania",
-      "logo": "http://www.bankacredins.com/wp-content/uploads/2016/06/2016-06-15.png",
-      "lat": 41.333624,
-      "lng": 19.833582
+      "name": "Farmaci Marjeta",
+      "address": " Rr. Kavajes",
+      "lat": 41.3256366,
+      "lng": 19.805837
     }
   ],
   "qsh": [
     {
       "id": 1,
-      "name": "Banka Kombetare Tregtare",
-      "address": "Bulevardi \"Zhan d\'Ark\", Tiranë, Shqipëri",
-      "logo": "http://www.publicity.al/wp-content/uploads/2012/10/bkt-logo-282x188.jpg",
+      "name": "QSH 1",
+      "address": "Bulevardi \"Zhan d\'Ark\"",
       "lat": 41.3249335,
       "lng": 19.8203699
     },
     {
       "id": 2,
-      "name": "Raiffeisen Bank",
-      "address": "Rr. Kavajes,Tirana-Albania",
-      "logo": "http://www.raiffeisen.al/themes/site_themes/default_site/images/logos/header_logo.png",
+      "name": "QSH 2",
+      "address": "Rr. Kavajes",
       "lat": 41.327896,
       "lng": 19.7661116
     },
     {
       "id": 3,
-      "name": "Alpha Bank",
-      "address": "Bulevardi Zogu I, Tiranë 1001, Albania",
-      "logo": "http://www.alpha.al/Themes/1/Default/Media/logo.gif",
+      "name": "QSH 3",
+      "address": "Bulevardi Zogu I",
       "lat": 41.330817,
       "lng": 19.817522
     },
     {
       "id": 4,
-      "name": "NBG Bank",
-      "address": "Rr. Dritan Hoxha, Tiranë, Albania",
-      "logo": "http://www.nbgbank.al/img/logo.jpg",
+      "name": "QSH 4",
+      "address": "Rr. Dritan Hoxha",
       "lat": 41.334104,
       "lng": 19.802430
     },
     {
       "id": 5,
-      "name": "Credins Bank",
-      "address": " Rr. Arkitekt Kasemi, Tiranë 1001, Albania",
-      "logo": "http://www.bankacredins.com/wp-content/uploads/2016/06/2016-06-15.png",
+      "name": "QSH 5",
+      "address": " Rr. Arkitekt Kasemi",
       "lat": 41.333624,
       "lng": 19.833582
     }

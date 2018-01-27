@@ -1,46 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:clickable="true"
-    android:background="@drawable/ripple_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="8dp"
+    android:layout_marginTop="4dp"
+    app:cardBackgroundColor="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_centerVertical="true"
-        android:elevation="4dp"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_launcher" />
-
     <LinearLayout
-        android:id="@+id/list_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/image"
-        android:orientation="vertical">
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:weightSum="1"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/item_name"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textColor="@color/gray"
-            android:textSize="23sp" />
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerVertical="true"
+                android:elevation="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/farmacia" />
 
-        <TextView
-            android:id="@+id/item_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:maxLines="2"
-            android:textColor="@color/gray"
-            android:textSize="14sp" />
+            <LinearLayout
+                android:id="@+id/list_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/image"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/item_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:maxLines="2"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="end|center_vertical"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/youtubeItem"
+                android:layout_width="66dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/youtube"/>
+            <!--<ImageView-->
+                <!--android:layout_width="66dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:clickable="true"-->
+                <!--android:focusable="true"-->
+                <!--android:src="@drawable/ic_near_me_black_24px"-->
+                <!--android:layout_marginTop="12dp"/>-->
+        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</android.support.v7.widget.CardView>
 

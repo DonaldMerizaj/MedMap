@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.user.medcare.adapter.AtmListRecyclerAdapter;
 import com.example.user.medcare.adapter.OnClickListenerRecyclerView;
 import com.example.user.medcare.model.Bank;
+import com.example.user.medcare.model.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -103,7 +104,7 @@ public class MedViewActivity extends AppCompatActivity {
 
         if(bundle != null)
         {
-            mSelectedBankId = bundle.getInt(Bank.EXTRA_ID);
+            mSelectedBankId = bundle.getInt(Item.EXTRA_ID);
             mBank = getBankDetails();
 //            Log.d("bank", String.valueOf(mBank.getmAtms().size()));
             setTitle(mBank.getName());
@@ -191,8 +192,6 @@ public class MedViewActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_bank_view, menu);
-
-
         return true;
     }
 

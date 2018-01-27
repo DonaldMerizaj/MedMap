@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private ViewPagerAdapter mPageAdapter;
-    private boolean locationEnabled;
+    private boolean locationEnabled, internetEnabled;
     public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION= 100;
     public static LatLng defaultLocation;
 
@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabTitles();
 
+        locationEnabled = checkPermissions();
+        internetEnabled = isNetworkAvailable();
+        if (!internetEnabled){
+            Toast.makeText(getApplicationContext(), "Aktivizoni internetin per te pare harten!", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -88,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
         if (id == R.id.action_list) {
             Intent i = new Intent(getApplicationContext(),ListItemActivity.class);
             startActivity(i);
-            finish();
             return true;
         }
 
@@ -116,19 +120,28 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
     }
 
     public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        ConnectivityManager connManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = null;
+
+        if (connManager != null) {
+            mWifi = connManager.getActiveNetworkInfo();
+            if (mWifi != null) {
+                // connected to the internet
+                return mWifi.getState() == NetworkInfo.State.CONNECTED;
+            }
+        }
+
+        return false;
     }
 
-
+    public boolean isInternetEnabled(){
+        return internetEnabled;
+    }
     public boolean isLocationEnabled() {
         int locationMode = 0;
 
             try {
                 locationMode = Settings.Secure.getInt(getApplicationContext().getContentResolver(), Settings.Secure.LOCATION_MODE);
-
             } catch (Settings.SettingNotFoundException e) {
                 e.printStackTrace();
                 return false;
@@ -136,7 +149,10 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
 
             return locationMode != Settings.Secure.LOCATION_MODE_OFF;
 
+    }
 
+    public boolean isPermissionGranted(){
+        return locationEnabled;
     }
 
     private void requestLocationPremission() {
@@ -237,4 +253,8 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

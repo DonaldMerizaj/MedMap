@@ -3,12 +3,26 @@ package com.example.user.medcare.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.medcare.R;
+import com.example.user.medcare.adapter.ItemListRecyclerAdapter;
+import com.example.user.medcare.model.Item;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,46 +43,57 @@ public class QshFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private RecyclerView mRecyclerQsh;
+    private Context mContext;
+    private ItemListRecyclerAdapter mAdapter;
 
     public QshFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment QshFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static QshFragment newInstance(String param1, String param2) {
         QshFragment fragment = new QshFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_qsh_list, container, false);
+
+        mContext = getActivity();
+
+        //Inicializon view me listen e farmacive
+        return view;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_qsh_list, container, false);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        mRecyclerQsh = (RecyclerView)view.findViewById(R.id.mRecyclerQsh);
+        initView();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    private void initView() {
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
+        mRecyclerQsh.setLayoutManager(mLayoutManager);
+
+//        mRecyclerFarmaci.addOnItemTouchListener(new OnClickListenerRecyclerView(mContext,
+//                new OnClickListenerRecyclerView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                Intent i = new Intent(mContext, MedViewActivity.class);
+//                i.putExtra(Item.EXTRA_ID, mAdapter.getAll().get(position).getId());
+//                startActivity(i);
+//            }
+//        }));
+
+        mAdapter = new ItemListRecyclerAdapter(getAllFarmaci(), mContext);
+        mRecyclerQsh.setAdapter(mAdapter);
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -78,30 +103,65 @@ public class QshFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof QshFragment.OnFragmentInteractionListener) {
+            mListener = (QshFragment.OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    // lexon te gjitha farmcaite nga JSON me farmaci
+    private ArrayList<Item> getAllFarmaci() {
+
+        ArrayList<Item> mb = new ArrayList<>();
+
+        try {
+            JSONObject obj = new JSONObject(loadJSONFromAsset());
+
+
+            JSONArray array = obj.getJSONArray("qsh");
+
+
+            for (int i = 0; i <array.length() ; i++)
+            {
+                JSONObject o = array.getJSONObject(i);
+
+                Item b = new Item(o.getString("name"), o.getString("address"));
+                b.setLat(o.getDouble("lat"));
+                b.setLng(o.getDouble("lng"));
+                b.setId(o.getInt("id"));
+                mb.add(b);
+
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return mb;
+    }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = mContext.getAssets().open("medcare.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

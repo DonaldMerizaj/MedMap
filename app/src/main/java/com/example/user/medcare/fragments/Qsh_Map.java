@@ -61,6 +61,8 @@ public class Qsh_Map extends Fragment {
     private static final String KEY_LOCATION = "location";
     private Parcelable mCurrentLocation, mCameraPosition;
     private boolean mLocationPermissionGranted;
+    private boolean isPermissionGranted = false;
+    private boolean isInternetEnabled = false;
 
     public Qsh_Map() {
         // Required empty public constructor
@@ -99,12 +101,17 @@ public class Qsh_Map extends Fragment {
                 googleMap = map;
 
                 // Turn on the My Location layer and the related control on the map.
-                updateLocationUI();
+
 
                 // Get the current location of the device and set the position of the map.
-                ((MainActivity) getActivity()).checkPermissions();
-                getDeviceLocation();
-                initMapPins();
+                isPermissionGranted = ((MainActivity)getActivity()).isPermissionGranted();
+                isInternetEnabled = ((MainActivity)getActivity()).isInternetEnabled();
+                updateLocationUI();
+                // Get the current location of the device and set the position of the map.
+                if (isPermissionGranted){
+                    getDeviceLocation();
+                    initMapPins();
+                }
             }
         });
 
@@ -141,7 +148,7 @@ public class Qsh_Map extends Fragment {
             return;
         }
         try {
-            if (((MainActivity)getActivity()).checkPermissions()) {
+            if (isPermissionGranted) {
                 googleMap.setMyLocationEnabled(true);
                 googleMap.getUiSettings().setMyLocationButtonEnabled(true);
             } else {
@@ -161,7 +168,7 @@ public class Qsh_Map extends Fragment {
      * 693555197
      */
         try {
-            if (((MainActivity)getActivity()).checkPermissions()) {
+            if (isPermissionGranted) {
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
                     @Override
@@ -235,7 +242,6 @@ public class Qsh_Map extends Fragment {
                 JSONObject o = array.getJSONObject(i);
 
                 Farmaci b = new Farmaci(o.getString("name"), o.getString("address"));
-                b.setImage(o.getString("logo"));
                 b.setLat(o.getDouble("lat"));
                 b.setLng(o.getDouble("lng"));
                 b.setId(o.getInt("id"));
@@ -244,7 +250,7 @@ public class Qsh_Map extends Fragment {
 
                 if (googleMap != null) {
                     LatLng l = b.getLatLng();
-                    Marker m = googleMap.addMarker(new MarkerOptions().position(l).title(b.getName()).snippet("Direction"));
+                    Marker m = googleMap.addMarker(new MarkerOptions().position(l).title(b.getName()).snippet(b.getAddress()));
                     mMarkers.add(m);
                 }
             }
@@ -314,14 +320,15 @@ public class Qsh_Map extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         if (googleMap != null) {
             outState.putParcelable(KEY_CAMERA_POSITION, googleMap.getCameraPosition());
-            if (mLastKnownLocation == null) {
-                mCurrentLocation = ((MainActivity) getActivity()).getDefaultLocation();
-                outState.putParcelable(KEY_LOCATION, mCurrentLocation);
 
-            }else{
-                outState.putParcelable(KEY_LOCATION, mLastKnownLocation);
-
-            }
+            mCurrentLocation = ((MainActivity) getActivity()).getDefaultLocation();
+            outState.putParcelable(KEY_LOCATION, mCurrentLocation);
+//            if (mLastKnownLocation == null) {
+//
+//            }else{
+//                outState.putParcelable(KEY_LOCATION, mLastKnownLocation);
+//
+//            }
             super.onSaveInstanceState(outState);
         }
     }

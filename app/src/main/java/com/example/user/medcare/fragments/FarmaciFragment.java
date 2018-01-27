@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class FarmaciFragment extends Fragment {
-
 
     private RecyclerView mRecyclerFarmaci;
     private Context mContext;
@@ -61,33 +61,37 @@ public class FarmaciFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_farmaci_list, container, false);
 
-        mContext = ((ListItemActivity)getActivity()).getApplicationContext();
+        mContext = getActivity();
 
         //Inicializon view me listen e farmacive
-        initView();
         return view;
 
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        mRecyclerFarmaci = (RecyclerView)view.findViewById(R.id.mRecyclerFarmaci);
+        initView();
+    }
+
     private void initView() {
-        mRecyclerFarmaci = (RecyclerView)getActivity().findViewById(R.id.mRecyclerFarmaci);
+
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerFarmaci.setLayoutManager(mLayoutManager);
 
-        mRecyclerFarmaci.addOnItemTouchListener(new OnClickListenerRecyclerView(mContext,
-                new OnClickListenerRecyclerView.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent i = new Intent(mContext, MedViewActivity.class);
-                i.putExtra(Item.EXTRA_ID, mAdapter.getAll().get(position).getId());
-                startActivity(i);
-            }
-        }));
+//        mRecyclerFarmaci.addOnItemTouchListener(new OnClickListenerRecyclerView(mContext,
+//                new OnClickListenerRecyclerView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                Intent i = new Intent(mContext, MedViewActivity.class);
+//                i.putExtra(Item.EXTRA_ID, mAdapter.getAll().get(position).getId());
+//                startActivity(i);
+//            }
+//        }));
 
         mAdapter = new ItemListRecyclerAdapter(getAllFarmaci(), mContext);
         mRecyclerFarmaci.setAdapter(mAdapter);
     }
-
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -127,7 +131,6 @@ public class FarmaciFragment extends Fragment {
                 JSONObject o = array.getJSONObject(i);
 
                 Item b = new Item(o.getString("name"), o.getString("address"));
-                b.setImage(o.getString("logo"));
                 b.setLat(o.getDouble("lat"));
                 b.setLng(o.getDouble("lng"));
                 b.setId(o.getInt("id"));
@@ -141,7 +144,6 @@ public class FarmaciFragment extends Fragment {
         }
         return mb;
     }
-
 
     public String loadJSONFromAsset() {
         String json = null;
@@ -162,4 +164,5 @@ public class FarmaciFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
 }

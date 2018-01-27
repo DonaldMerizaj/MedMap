@@ -15,26 +15,31 @@ import android.view.ViewGroup;
 
 import com.example.user.medcare.fragments.FarmaciFragment;
 import com.example.user.medcare.fragments.Farmaci_Map;
+import com.example.user.medcare.fragments.QshFragment;
 import com.example.user.medcare.fragments.Qsh_Map;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListItemActivity extends AppCompatActivity implements FarmaciFragment.OnFragmentInteractionListener {
+public class ListItemActivity extends AppCompatActivity implements FarmaciFragment.OnFragmentInteractionListener,
+        QshFragment.OnFragmentInteractionListener {
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private ListItemActivity.ViewPagerAdapter mPageAdapter;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_item);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
@@ -47,14 +52,14 @@ public class ListItemActivity extends AppCompatActivity implements FarmaciFragme
 
     private void setupTabTitles() {
         mTabLayout.getTabAt(0).setText("FARMACI");
-//        mTabLayout.getTabAt(1).setText("QSH");
+        mTabLayout.getTabAt(1).setText("QSH");
     }
 
     private void setupViewPager(ViewPager viewPager) {
 
         mPageAdapter = new ListItemActivity.ViewPagerAdapter(getSupportFragmentManager());
         mPageAdapter.addFragment(new FarmaciFragment(), "");
-//        mPageAdapter.addFragment(new Qsh_Map(), "");
+        mPageAdapter.addFragment(new QshFragment(), "");
 
         viewPager.setAdapter(mPageAdapter);
     }
@@ -126,4 +131,9 @@ public class ListItemActivity extends AppCompatActivity implements FarmaciFragme
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.stay, R.anim.slide_down);
+    }
 }
