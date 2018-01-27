@@ -28,7 +28,7 @@ import java.io.InputStream;
 public class MedViewActivity extends AppCompatActivity {
 
     private int mSelectedBankId;
-    private Bank mBank = null;
+    private Item mItem = null;
     TextView address;
     private AtmListRecyclerAdapter mAdapter;
     private RecyclerView mRecyclerAtms;
@@ -46,8 +46,6 @@ public class MedViewActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         initView();
         setActions();
 
@@ -58,7 +56,7 @@ public class MedViewActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?daddr="+mBank.getLat()+","+mBank.getLng()+""));
+                        Uri.parse("http://maps.google.com/maps?daddr="+mItem.getLat()+","+mItem.getLng()+""));
                 startActivity(intent);
 
             }
@@ -105,28 +103,28 @@ public class MedViewActivity extends AppCompatActivity {
         if(bundle != null)
         {
             mSelectedBankId = bundle.getInt(Item.EXTRA_ID);
-            mBank = getBankDetails();
-//            Log.d("bank", String.valueOf(mBank.getmAtms().size()));
-            setTitle(mBank.getName());
-            address.setText(mBank.getAddress());
+            mItem = getItemDetails();
+//            Log.d("bank", String.valueOf(mItem.getmAtms().size()));
+            setTitle(mItem.getName());
+            address.setText(mItem.getAddress());
 
 
-            mAdapter = new AtmListRecyclerAdapter(mBank.getmAtms(), getApplicationContext());
+            mAdapter = new AtmListRecyclerAdapter(mItem.getItems(), getApplicationContext());
             mRecyclerAtms.setAdapter(mAdapter);
         }
     }
 
 
 
-    private Bank getBankDetails() {
+    private Item getItemDetails() {
 
-        Bank mb = null;
+        Item mb = null;
 
         try {
             JSONObject obj = new JSONObject(loadJSONFromAsset());
 
 
-            JSONArray array = obj.getJSONArray("banks");
+            JSONArray array = obj.getJSONArray("medcare.json");
 
 
             for (int i = 0; i <array.length() ; i++)
@@ -136,12 +134,11 @@ public class MedViewActivity extends AppCompatActivity {
 
                 if (o.getInt("id") == mSelectedBankId) {
 
-                    mb = new Bank(o.getString("name"), o.getString("address"));
-                    mb.setImage(o.getString("logo"));
+                    mb = new Item(o.getString("name"), o.getString("address"));
                     mb.setLat(o.getDouble("lat"));
                     mb.setLng(o.getDouble("lng"));
                     mb.setId(o.getInt("id"));
-                    mb.setDecodeAtms(o);
+                    mb.(o);
                     return mb;
                 }
 
@@ -176,15 +173,15 @@ public class MedViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
-            case R.id.action_video:
-                startActivity(new Intent(getApplicationContext(), PlayerViewActivity.class));
-                break;
-
-        }
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                onBackPressed();
+//                break;
+//            case R.id.action_video:
+//                startActivity(new Intent(getApplicationContext(), PlayerViewActivity.class));
+//                break;
+//
+//        }
 
         return true;
     }
