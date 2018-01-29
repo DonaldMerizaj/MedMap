@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import com.example.user.medcare.PlayerViewActivity;
 import com.example.user.medcare.R;
-import com.example.user.medcare.model.Bank;
 import com.example.user.medcare.model.Item;
-import com.squareup.picasso.Picasso;
 
 
 public class ItemListRecyclerViewHolder extends RecyclerView.ViewHolder {

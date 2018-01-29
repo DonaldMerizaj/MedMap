@@ -17,7 +17,10 @@ import android.view.ViewGroup;
 
 import com.example.user.medcare.MainActivity;
 import com.example.user.medcare.R;
+import com.example.user.medcare.model.AnalyticsAplication;
 import com.example.user.medcare.model.Farmaci;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -63,6 +66,7 @@ public class Qsh_Map extends Fragment {
     private boolean mLocationPermissionGranted;
     private boolean isPermissionGranted = false;
     private boolean isInternetEnabled = false;
+    private Tracker mTracker;
 
     public Qsh_Map() {
         // Required empty public constructor
@@ -87,6 +91,14 @@ public class Qsh_Map extends Fragment {
         mContext = ((MainActivity) getActivity()).getApplicationContext();
         mMapView.onResume(); // needed to get the map to display immediately
 
+        // Analytics
+        AnalyticsAplication application = (AnalyticsAplication)getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
+
+
+        Log.i("SEnding Hit:", "QSH");
+        mTracker.setScreenName("Harta e Qendrave Shendetesore");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {

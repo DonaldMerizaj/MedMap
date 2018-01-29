@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import com.example.user.medcare.fragments.FarmaciFragment;
 import com.example.user.medcare.fragments.Farmaci_Map;
 import com.example.user.medcare.fragments.QshFragment;
 import com.example.user.medcare.fragments.Qsh_Map;
+import com.example.user.medcare.model.AnalyticsAplication;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,8 @@ public class ListItemActivity extends AppCompatActivity implements FarmaciFragme
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private ListItemActivity.ViewPagerAdapter mPageAdapter;
+    private Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

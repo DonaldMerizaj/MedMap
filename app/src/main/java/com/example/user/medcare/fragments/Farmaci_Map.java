@@ -18,7 +18,10 @@ import android.widget.Toast;
 
 import com.example.user.medcare.MainActivity;
 import com.example.user.medcare.R;
+import com.example.user.medcare.model.AnalyticsAplication;
 import com.example.user.medcare.model.Farmaci;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -47,7 +50,6 @@ import java.util.Locale;
 public class Farmaci_Map extends Fragment {
 
     Context mContext;
-
     private OnFragmentInteractionListener mListener;
     private Location mLastKnownLocation;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -56,6 +58,7 @@ public class Farmaci_Map extends Fragment {
     private Parcelable mCurrentLocation, mCameraPosition;
     private boolean isPermissionGranted = false;
     private boolean isInternetEnabled =false;
+    private Tracker mTracker;
 
     public Farmaci_Map() {
         // Required empty public constructor
@@ -80,6 +83,13 @@ public class Farmaci_Map extends Fragment {
         mContext = ((MainActivity) getActivity()).getApplicationContext();
         mMapView.onResume(); // needed to get the map to display immediately
 
+        // Analytics
+        AnalyticsAplication application = (AnalyticsAplication)getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
+
+
+        mTracker.setScreenName("Harta e Farmacive");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -93,8 +103,7 @@ public class Farmaci_Map extends Fragment {
             public void onMapReady(GoogleMap map) {
                 googleMap = map;
 
-                // Turn on the My Location layer and the related control on the map.
-
+                // Turn on the My Location layer and the related control on the map
                 isPermissionGranted = ((MainActivity)getActivity()).isPermissionGranted();
                 isInternetEnabled = ((MainActivity)getActivity()).isInternetEnabled();
                 updateLocationUI();
@@ -335,8 +344,7 @@ public class Farmaci_Map extends Fragment {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
 
-
-                mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+           mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
 
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }

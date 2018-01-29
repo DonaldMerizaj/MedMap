@@ -28,6 +28,9 @@ import android.widget.Toast;
 
 import com.example.user.medcare.fragments.Farmaci_Map;
 import com.example.user.medcare.fragments.Qsh_Map;
+import com.example.user.medcare.model.AnalyticsAplication;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
     private boolean locationEnabled, internetEnabled;
     public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION= 100;
     public static LatLng defaultLocation;
+    private Tracker mTracker;
 
     public LatLng getDefaultLocation() {
         defaultLocation = new LatLng(41.3269816, 19.8161949);
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
+
+
 
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -106,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
 
     private void setupViewPager(ViewPager viewPager) {
 
+        // krijon  fragemntet dhe i vendos
         mPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mPageAdapter.addFragment(new Farmaci_Map(), "");
         mPageAdapter.addFragment(new Qsh_Map(), "");
@@ -252,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements Qsh_Map.OnFragmen
             return mFragmentTitleList.get(position);
         }
     }
+
 
     @Override
     public void onBackPressed() {

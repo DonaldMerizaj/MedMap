@@ -8,13 +8,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.medcare.R;
 import com.example.user.medcare.adapter.ItemListRecyclerAdapter;
+import com.example.user.medcare.model.AnalyticsAplication;
 import com.example.user.medcare.model.Item;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +50,7 @@ public class QshFragment extends Fragment {
     private RecyclerView mRecyclerQsh;
     private Context mContext;
     private ItemListRecyclerAdapter mAdapter;
+    private Tracker mTracker;
 
     public QshFragment() {
 
@@ -65,6 +70,15 @@ public class QshFragment extends Fragment {
 
         mContext = getActivity();
 
+
+        // Analytics
+        AnalyticsAplication application = (AnalyticsAplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
+
+
+        Log.i("SEnding Hit:", "List");
+        mTracker.setScreenName("Lista e QSH");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         //Inicializon view me listen e farmacive
         return view;
     }

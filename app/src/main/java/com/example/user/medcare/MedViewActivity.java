@@ -13,9 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.user.medcare.adapter.AtmListRecyclerAdapter;
-import com.example.user.medcare.adapter.OnClickListenerRecyclerView;
-import com.example.user.medcare.model.Bank;
 import com.example.user.medcare.model.Item;
 
 import org.json.JSONArray;
@@ -30,7 +27,6 @@ public class MedViewActivity extends AppCompatActivity {
     private int mSelectedBankId;
     private Item mItem = null;
     TextView address;
-    private AtmListRecyclerAdapter mAdapter;
     private RecyclerView mRecyclerAtms;
     TextView mViewAllAtms;
 
@@ -38,7 +34,7 @@ public class MedViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bank_view);
+//        setContentView(R.layout.activity_bank_view);
         overridePendingTransition(R.anim.slide_up, R.anim.stay);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,13 +73,13 @@ public class MedViewActivity extends AppCompatActivity {
 
     private void initView() {
         Bundle bundle = getIntent().getExtras();
-
-        address = (TextView) findViewById(R.id.address);
-        mViewAllAtms = (TextView) findViewById(R.id.viewatms);
-
-
-
-        mRecyclerAtms = (RecyclerView) findViewById(R.id.mRecycler);
+//
+//        address = (TextView) findViewById(R.id.address);
+//        mViewAllAtms = (TextView) findViewById(R.id.viewatms);
+//
+//
+//
+//        mRecyclerAtms = (RecyclerView) findViewById(R.id.mRecycler);
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerAtms.setLayoutManager(mLayoutManager);
 
@@ -109,8 +105,8 @@ public class MedViewActivity extends AppCompatActivity {
             address.setText(mItem.getAddress());
 
 
-            mAdapter = new AtmListRecyclerAdapter(mItem.getItems(), getApplicationContext());
-            mRecyclerAtms.setAdapter(mAdapter);
+//            mAdapter = new AtmListRecyclerAdapter(mItem.getItems(), getApplicationContext());
+//            mRecyclerAtms.setAdapter(mAdapter);
         }
     }
 
@@ -138,7 +134,7 @@ public class MedViewActivity extends AppCompatActivity {
                     mb.setLat(o.getDouble("lat"));
                     mb.setLng(o.getDouble("lng"));
                     mb.setId(o.getInt("id"));
-                    mb.(o);
+//                    mb.(o);
                     return mb;
                 }
 
@@ -188,7 +184,7 @@ public class MedViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_bank_view, menu);
+//        getMenuInflater().inflate(R.menu.menu_bank_view, menu);
         return true;
     }
 
